@@ -22,7 +22,7 @@ class ViewController: UIViewController {
 
         self.display                = UILabel()
         self.display!.textColor     = UIColor.blackColor()
-        self.display!.font          = UIFont(name: "HelveticaNeue", size: 32.0)
+        self.display!.font          = UIFont.systemFontOfSize(36.0)
         self.display!.textAlignment = NSTextAlignment.Right
         self.display?.text          = "0"
         
@@ -31,10 +31,13 @@ class ViewController: UIViewController {
         for idx in 0...8 {
             btnArray.append(UIButton(type: UIButtonType.System))
             btnArray[idx].setTitle("\(idx + 1)", forState: UIControlState.Normal)
+            btnArray[idx].titleLabel!.font = UIFont.systemFontOfSize(24.0)
+            
             view.addSubview(btnArray[idx])
         }
         
         layoutViews()
+        
 
     }
     
