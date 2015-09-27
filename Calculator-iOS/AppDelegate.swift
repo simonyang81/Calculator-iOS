@@ -13,15 +13,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var mainCtrl: ViewController?
+    var navCtrl: UINavigationController?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window                     = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.mainCtrl                   = ViewController()
+        self.window!.backgroundColor    = UIColor.whiteColor()
+        self.navCtrl                    = UINavigationController(rootViewController: mainCtrl!)
+        self.window!.rootViewController = navCtrl
+        
         self.window!.makeKeyAndVisible()
-        self.mainCtrl = ViewController()
-        self.window!.backgroundColor = UIColor.whiteColor()
-        self.window!.rootViewController = mainCtrl
         
         // Override point for customization after application launch.
         return true

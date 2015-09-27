@@ -39,7 +39,7 @@
 		05C5E4DA15B81AB0CFB9DAEB /* Pods_Calculator_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Calculator_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		326D1C1677903CC89D151389 /* Pods-Calculator-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calculator-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Calculator-iOS/Pods-Calculator-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		D6B3E5AD3EEDE87B23CE9C50 /* Pods-Calculator-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calculator-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Calculator-iOS/Pods-Calculator-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		F44B38F61BB3CFE6008F450F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		F44B38F61BB3CFE6008F450F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F45D98D41BB4DCA40058AA63 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		F4E3D2311BB3C7650014F44C /* Calculator-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Calculator-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4E3D2341BB3C7650014F44C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
