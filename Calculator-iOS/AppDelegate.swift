@@ -12,14 +12,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var mainCtrl: ViewController?
+    var mainCtrl: UIViewController?
     var navCtrl: UINavigationController?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         self.window                     = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.mainCtrl                   = ViewController()
+        self.mainCtrl                   = MainViewController()
         self.window!.backgroundColor    = UIColor.whiteColor()
         self.navCtrl                    = UINavigationController(rootViewController: mainCtrl!)
         self.window!.rootViewController = navCtrl

@@ -1,25 +1,24 @@
 //
-//  ViewController.swift
+//  CalculatorViewController.swift
 //  Calculator-iOS
 //
-//  Created by Simon Yang on 9/24/15.
+//  Created by Simon Yang on 9/27/15.
 //  Copyright © 2015 Simon Yang. All rights reserved.
 //
 
 import UIKit
 import Cartography
 
-class ViewController: UIViewController {
-    
+class CalculatorViewController: UIViewController {
+
     var display: UILabel?
     var btnArray = [UIButton]()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        self.navigationItem.title   = "Calculator"
 
+        self.navigationItem.title   = "Calculator"
+               
         self.display                = UILabel()
         self.display!.textColor     = UIColor.blackColor()
         self.display!.font          = UIFont.systemFontOfSize(36.0)
@@ -34,13 +33,15 @@ class ViewController: UIViewController {
             btnArray[idx].titleLabel!.font = UIFont.systemFontOfSize(24.0)
             
             view.addSubview(btnArray[idx])
+            
+            btnArray[idx].addTarget(self, action: Selector("appendDigit:"),
+                forControlEvents: UIControlEvents.TouchUpInside)
         }
         
         layoutViews()
-        
 
-    }
     
+    }
     
     func layoutViews() {
         
@@ -54,15 +55,15 @@ class ViewController: UIViewController {
         constrain(btnArray[6], btnArray[7], btnArray[8], display!) { view1, view2, view3, view4 in
             layoutButttons(view1, view2: view2, view3: view3, view4: view4)
         }
-
+        
         constrain(btnArray[3], btnArray[4], btnArray[5], btnArray[6]) { view1, view2, view3, view4 in
             layoutButttons(view1, view2: view2, view3: view3, view4: view4)
         }
-
+        
         constrain(btnArray[0], btnArray[1], btnArray[2], btnArray[3]) { view1, view2, view3, view4 in
             layoutButttons(view1, view2: view2, view3: view3, view4: view4)
         }
-
+        
         
     }
     
@@ -79,13 +80,28 @@ class ViewController: UIViewController {
         
         view1.trailing  == view2.leading - 10
         view2.trailing  == view3.leading - 10
-
+        
     }
+    
+    func appendDigit(sender: UIButton) {
+        print("digit == \(sender.currentTitle!)" )
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
 
 }
