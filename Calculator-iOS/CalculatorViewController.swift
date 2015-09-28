@@ -11,21 +11,35 @@ import Cartography
 
 class CalculatorViewController: UIViewController {
 
-    var display: UILabel?
+    var display: UILabel!
+    // Which is equivalent to "var display: UILabel! = nil"
+    // var display: UILabel? which is equivalent to "var display: UILabel? = nil", have to use '!' to unwrap optional type
+    
     var btnArray = [UIButton]()
+    var num0Btn = UIButton(type: UIButtonType.System)
+    
+    var userIsInTheMiddleOfTypingANumber = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationItem.title   = "Calculator"
-               
-        self.display                = UILabel()
-        self.display!.textColor     = UIColor.blackColor()
-        self.display!.font          = UIFont.systemFontOfSize(36.0)
-        self.display!.textAlignment = NSTextAlignment.Right
-        self.display?.text          = "0"
         
-        view.addSubview(display!)
+//        可选类型 (Optional) 显式解析 和 隐式解析
+//        let possibleString: String? = "An optional string."
+//        let forcedString: String = possibleString! // 需要惊叹号来获取值
+//        let assumedString: String! = "An implicitly unwrapped optional string."
+//        let implicitString: String = assumedString // 不需要感叹号
+
+
+        self.navigationItem.title  = "Calculator"
+        self.navigationItem.leftBarButtonItem?.title = ""
+
+        self.display               = UILabel()
+        self.display.textColor     = UIColor.blackColor()
+        self.display.font          = UIFont.systemFontOfSize(36.0)
+        self.display.textAlignment = NSTextAlignment.Right
+        self.display.text          = "0"
+        
+        view.addSubview(display)
         
         for idx in 0...8 {
             btnArray.append(UIButton(type: UIButtonType.System))
@@ -38,6 +52,12 @@ class CalculatorViewController: UIViewController {
                 forControlEvents: UIControlEvents.TouchUpInside)
         }
         
+        num0Btn.setTitle("0", forState: UIControlState.Normal)
+        num0Btn.titleLabel!.font = UIFont.systemFontOfSize(24.0)
+        view.addSubview(num0Btn)
+        num0Btn.addTarget(self, action: Selector("appendDigit:"),
+            forControlEvents: UIControlEvents.TouchUpInside)
+        
         layoutViews()
 
     
@@ -45,14 +65,14 @@ class CalculatorViewController: UIViewController {
     
     func layoutViews() {
         
-        constrain(display!) { view in
+        constrain(display) { view in
             view.centerX  == view.superview!.centerX
             view.leading == view.superview!.leading + 20
             view.trailing == view.superview!.trailing - 20
             view.top == view.superview!.top + 70
         }
         
-        constrain(btnArray[6], btnArray[7], btnArray[8], display!) { view1, view2, view3, view4 in
+        constrain(btnArray[6], btnArray[7], btnArray[8], display) { view1, view2, view3, view4 in
             layoutButttons(view1, view2: view2, view3: view3, view4: view4)
         }
         
@@ -62,6 +82,13 @@ class CalculatorViewController: UIViewController {
         
         constrain(btnArray[0], btnArray[1], btnArray[2], btnArray[3]) { view1, view2, view3, view4 in
             layoutButttons(view1, view2: view2, view3: view3, view4: view4)
+        }
+        
+        constrain(num0Btn, btnArray[1]) { view1, view2 in
+            view1.top == view2.bottom + 10
+            view1.leading == view2.leading
+            view1.trailing == view2.trailing
+            
         }
         
         
@@ -85,6 +112,12 @@ class CalculatorViewController: UIViewController {
     
     func appendDigit(sender: UIButton) {
         print("digit == \(sender.currentTitle!)" )
+        if userIsInTheMiddleOfTypingANumber {
+            display.text = display.text! + sender.currentTitle!
+        } else {
+            display.text = sender.currentTitle!
+            userIsInTheMiddleOfTypingANumber = true
+        }
     }
 
 
