@@ -15,8 +15,16 @@ class CalculatorViewController: UIViewController {
     // Which is equivalent to "var display: UILabel! = nil"
     // var display: UILabel? which is equivalent to "var display: UILabel? = nil", have to use '!' to unwrap optional type
     
-    var btnArray = [UIButton]()
-    var num0Btn = UIButton(type: UIButtonType.System)
+    var btnArray     = [UIButton]()
+    var operandStack = Array<Double>()
+    
+    var num0Btn      = UIButton(type: UIButtonType.System)
+    var enterBtn     = UIButton(type: UIButtonType.System)
+    var multipBtn    = UIButton(type: UIButtonType.System)
+    var diviBtn      = UIButton(type: UIButtonType.System)
+    var additionBtn  = UIButton(type: UIButtonType.System)
+    var subBtn       = UIButton(type: UIButtonType.System)
+    
     
     var userIsInTheMiddleOfTypingANumber = false
     
@@ -31,7 +39,7 @@ class CalculatorViewController: UIViewController {
 
 
         self.navigationItem.title  = "Calculator"
-        self.navigationItem.leftBarButtonItem?.title = ""
+//        self.navigationItem.leftBarButtonItem?.title = ""
 
         self.display               = UILabel()
         self.display.textColor     = UIColor.blackColor()
@@ -44,7 +52,7 @@ class CalculatorViewController: UIViewController {
         for idx in 0...8 {
             btnArray.append(UIButton(type: UIButtonType.System))
             btnArray[idx].setTitle("\(idx + 1)", forState: UIControlState.Normal)
-            btnArray[idx].titleLabel!.font = UIFont.systemFontOfSize(24.0)
+            btnArray[idx].titleLabel!.font = UIFont.systemFontOfSize(28.0)
             
             view.addSubview(btnArray[idx])
             
@@ -53,13 +61,42 @@ class CalculatorViewController: UIViewController {
         }
         
         num0Btn.setTitle("0", forState: UIControlState.Normal)
-        num0Btn.titleLabel!.font = UIFont.systemFontOfSize(24.0)
+        num0Btn.titleLabel!.font = UIFont.systemFontOfSize(28.0)
         view.addSubview(num0Btn)
         num0Btn.addTarget(self, action: Selector("appendDigit:"),
             forControlEvents: UIControlEvents.TouchUpInside)
         
-        layoutViews()
+        enterBtn.setTitle("⏎", forState: UIControlState.Normal)
+        enterBtn.titleLabel!.font = UIFont.systemFontOfSize(28.0)
+        view.addSubview(enterBtn)
+        enterBtn.addTarget(self, action: Selector("enter:"),
+            forControlEvents: UIControlEvents.TouchUpInside)
+        
+        multipBtn.setTitle("×", forState: UIControlState.Normal)
+        multipBtn.titleLabel!.font = UIFont.systemFontOfSize(28.0)
+        view.addSubview(multipBtn)
+        multipBtn.addTarget(self, action: Selector("operate:"),
+            forControlEvents: UIControlEvents.TouchUpInside)
 
+        diviBtn.setTitle("÷", forState: UIControlState.Normal)
+        diviBtn.titleLabel!.font = UIFont.systemFontOfSize(28.0)
+        view.addSubview(diviBtn)
+        diviBtn.addTarget(self, action: Selector("operate:"),
+            forControlEvents: UIControlEvents.TouchUpInside)
+
+        additionBtn.setTitle("+", forState: UIControlState.Normal)
+        additionBtn.titleLabel!.font = UIFont.systemFontOfSize(28.0)
+        view.addSubview(additionBtn)
+        additionBtn.addTarget(self, action: Selector("operate:"),
+            forControlEvents: UIControlEvents.TouchUpInside)
+        
+        subBtn.setTitle("−", forState: UIControlState.Normal)
+        subBtn.titleLabel!.font = UIFont.systemFontOfSize(28.0)
+        view.addSubview(subBtn)
+        subBtn.addTarget(self, action: Selector("operate:"),
+            forControlEvents: UIControlEvents.TouchUpInside)
+        
+        layoutViews()
     
     }
     
@@ -72,41 +109,58 @@ class CalculatorViewController: UIViewController {
             view.top == view.superview!.top + 70
         }
         
-        constrain(btnArray[6], btnArray[7], btnArray[8], display) { view1, view2, view3, view4 in
-            layoutButttons(view1, view2: view2, view3: view3, view4: view4)
+        constrain(btnArray[6], btnArray[7], btnArray[8], multipBtn, display) { view1, view2, view3, view4, view5 in
+            layoutButttons(view1, view2: view2, view3: view3, view4: view4, view5: view5)
         }
         
-        constrain(btnArray[3], btnArray[4], btnArray[5], btnArray[6]) { view1, view2, view3, view4 in
-            layoutButttons(view1, view2: view2, view3: view3, view4: view4)
+        constrain(btnArray[3], btnArray[4], btnArray[5], diviBtn, btnArray[6]) { view1, view2, view3, view4, view5 in
+            layoutButttons(view1, view2: view2, view3: view3, view4: view4, view5: view5)
         }
         
-        constrain(btnArray[0], btnArray[1], btnArray[2], btnArray[3]) { view1, view2, view3, view4 in
-            layoutButttons(view1, view2: view2, view3: view3, view4: view4)
+        constrain(btnArray[0], btnArray[1], btnArray[2], additionBtn, btnArray[3]) { view1, view2, view3, view4, view5 in
+            layoutButttons(view1, view2: view2, view3: view3, view4: view4, view5: view5)
         }
         
         constrain(num0Btn, btnArray[1]) { view1, view2 in
-            view1.top == view2.bottom + 10
-            view1.leading == view2.leading
-            view1.trailing == view2.trailing
-            
+            layoutButttons(view1, view2: view2)
         }
         
+        constrain(enterBtn, btnArray[2]) {view1, view2 in
+            layoutButttons(view1, view2: view2)
+        }
+        
+        constrain(subBtn, additionBtn) { view1, view2 in
+            layoutButttons(view1, view2: view2)
+        }
+
         
     }
     
-    func layoutButttons(view1: LayoutProxy, view2: LayoutProxy, view3: LayoutProxy, view4: LayoutProxy) {
-        view1.top == view4.bottom + 10
-        view2.top == view4.bottom + 10
-        view3.top == view4.bottom + 10
+    func layoutButttons(view1: LayoutProxy, view2: LayoutProxy) {
+        view1.top == view2.bottom + 10
+        view1.leading == view2.leading
+        view1.trailing == view2.trailing
+
+    }
+    
+    func layoutButttons(view1: LayoutProxy, view2: LayoutProxy,
+        view3: LayoutProxy, view4: LayoutProxy, view5: LayoutProxy) {
         
+        view1.top == view5.bottom + 10
+        view2.top == view5.bottom + 10
+        view3.top == view5.bottom + 10
+        view4.top == view5.bottom + 10
+           
         view1.leading   == view1.superview!.leading + 50
-        view3.trailing  == view3.superview!.trailing  - 50
+        view4.trailing  == view3.superview!.trailing  - 50
         
         view1.width == view2.width
         view2.width == view3.width
+        view3.width == view4.width
         
         view1.trailing  == view2.leading - 10
         view2.trailing  == view3.leading - 10
+        view3.trailing  == view4.leading - 10
         
     }
     
@@ -119,8 +173,65 @@ class CalculatorViewController: UIViewController {
             userIsInTheMiddleOfTypingANumber = true
         }
     }
+    
+    var displayValue: Double {
+        get {
+            return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
+        }
+        set {
+            display.text = "\(newValue)"
+            userIsInTheMiddleOfTypingANumber = false
+        }
+    }
+    
+    func enter(sender: UIButton) {
+        userIsInTheMiddleOfTypingANumber = false
+        operandStack.append(displayValue)
+        
+        print("operandStack == \(operandStack)")
+    }
+    
+    func operate(sender: UIButton) {
+        let opetation = sender.currentTitle!
+        if userIsInTheMiddleOfTypingANumber {
+            enter(sender)
+        }
+        
+        switch opetation {
+            case "×":
+                performOperation(sender) { op1, op2 in
+                    return op1 * op2
+                }
+            
+            case "÷":
+                performOperation(sender) { op1, op2 in
+                    return op1 / op2
+                }
 
+            case "+":
+                performOperation(sender) { op1, op2 in
+                    return op1 + op2
+                }
+            
+            case "−":
+                performOperation(sender) { op1, op2 in
+                    return op1 - op2
+                }
+            
+            default: break
+        }
+    }
 
+    func performOperation(sender: UIButton, operation: (Double, Double) -> Double) {
+        
+        if operandStack.count >= 2 {
+            displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
+            enter(sender)
+        }
+
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
