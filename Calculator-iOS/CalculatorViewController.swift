@@ -25,7 +25,6 @@ class CalculatorViewController: UIViewController {
     var additionBtn  = UIButton(type: UIButtonType.System)
     var subBtn       = UIButton(type: UIButtonType.System)
     
-    
     var userIsInTheMiddleOfTypingANumber = false
     
     override func viewDidLoad() {
@@ -36,7 +35,6 @@ class CalculatorViewController: UIViewController {
 //        let forcedString: String = possibleString! // 需要惊叹号来获取值
 //        let assumedString: String! = "An implicitly unwrapped optional string."
 //        let implicitString: String = assumedString // 不需要感叹号
-
 
         self.navigationItem.title  = "Calculator"
 //        self.navigationItem.leftBarButtonItem?.title = ""
@@ -103,10 +101,10 @@ class CalculatorViewController: UIViewController {
     func layoutViews() {
         
         constrain(display) { view in
-            view.centerX  == view.superview!.centerX
-            view.leading == view.superview!.leading + 20
-            view.trailing == view.superview!.trailing - 20
-            view.top == view.superview!.top + 70
+            view.centerX    == view.superview!.centerX
+            view.leading    == view.superview!.leading + 20
+            view.trailing   == view.superview!.trailing - 20
+            view.top        == view.superview!.top + 70
         }
         
         constrain(btnArray[6], btnArray[7], btnArray[8], multipBtn, display) { view1, view2, view3, view4, view5 in
@@ -137,9 +135,9 @@ class CalculatorViewController: UIViewController {
     }
     
     func layoutButttons(view1: LayoutProxy, view2: LayoutProxy) {
-        view1.top == view2.bottom + 10
-        view1.leading == view2.leading
-        view1.trailing == view2.trailing
+        view1.top       == view2.bottom + 10
+        view1.leading   == view2.leading
+        view1.trailing  == view2.trailing
 
     }
     
@@ -166,6 +164,7 @@ class CalculatorViewController: UIViewController {
     
     func appendDigit(sender: UIButton) {
         print("digit == \(sender.currentTitle!)" )
+        
         if userIsInTheMiddleOfTypingANumber {
             display.text = display.text! + sender.currentTitle!
         } else {
@@ -199,24 +198,16 @@ class CalculatorViewController: UIViewController {
         
         switch opetation {
             case "×":
-                performOperation(sender) { op1, op2 in
-                    return op1 * op2
-                }
+                performOperation(sender) { $0 * $1 }
             
             case "÷":
-                performOperation(sender) { op1, op2 in
-                    return op1 / op2
-                }
+                performOperation(sender) { $0 / $1 }
 
             case "+":
-                performOperation(sender) { op1, op2 in
-                    return op1 + op2
-                }
+                performOperation(sender) { $0 + $1 }
             
             case "−":
-                performOperation(sender) { op1, op2 in
-                    return op1 - op2
-                }
+                performOperation(sender) { $0 - $1 }
             
             default: break
         }
@@ -229,7 +220,6 @@ class CalculatorViewController: UIViewController {
             enter(sender)
         }
 
-        
     }
     
     override func didReceiveMemoryWarning() {
