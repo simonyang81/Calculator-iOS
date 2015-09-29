@@ -201,13 +201,13 @@ class CalculatorViewController: UIViewController {
                 performOperation(sender) { $0 * $1 }
             
             case "÷":
-                performOperation(sender) { $0 / $1 }
+                performOperation(sender) { $1 / $0 }
 
             case "+":
                 performOperation(sender) { $0 + $1 }
             
             case "−":
-                performOperation(sender) { $0 - $1 }
+                performOperation(sender) { $1 - $0 }
             
             default: break
         }
