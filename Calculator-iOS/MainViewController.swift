@@ -19,7 +19,7 @@ class MainViewController: UIViewController {
         
         let rightBtn = UIBarButtonItem(title: "Calculator",
             style: UIBarButtonItemStyle.Plain,
-            target:self,
+            target: self,
             action: Selector("gotoCalculatorScreen:"))
         self.navigationItem.rightBarButtonItem = rightBtn
         

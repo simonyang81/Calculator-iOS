@@ -18,7 +18,8 @@ class CalculatorViewController: UIViewController {
     var btnArray     = [UIButton]()
     var operandStack = Array<Double>()
     
-    var num0Btn      = UIButton(type: UIButtonType.System)
+//    var num0Btn      = UIButton(type: UIButtonType.System)
+    
     var enterBtn     = UIButton(type: UIButtonType.System)
     var multipBtn    = UIButton(type: UIButtonType.System)
     var diviBtn      = UIButton(type: UIButtonType.System)
@@ -47,9 +48,9 @@ class CalculatorViewController: UIViewController {
         
         view.addSubview(display)
         
-        for idx in 0...8 {
+        for idx in 0...9 {
             btnArray.append(UIButton(type: UIButtonType.System))
-            btnArray[idx].setTitle("\(idx + 1)", forState: UIControlState.Normal)
+            btnArray[idx].setTitle("\(idx)", forState: UIControlState.Normal)
             btnArray[idx].titleLabel!.font = UIFont.systemFontOfSize(28.0)
             
             view.addSubview(btnArray[idx])
@@ -58,44 +59,28 @@ class CalculatorViewController: UIViewController {
                 forControlEvents: UIControlEvents.TouchUpInside)
         }
         
-        num0Btn.setTitle("0", forState: UIControlState.Normal)
-        num0Btn.titleLabel!.font = UIFont.systemFontOfSize(28.0)
-        view.addSubview(num0Btn)
-        num0Btn.addTarget(self, action: Selector("appendDigit:"),
-            forControlEvents: UIControlEvents.TouchUpInside)
-        
         enterBtn.setTitle("⏎", forState: UIControlState.Normal)
         enterBtn.titleLabel!.font = UIFont.systemFontOfSize(28.0)
         view.addSubview(enterBtn)
         enterBtn.addTarget(self, action: Selector("enter:"),
             forControlEvents: UIControlEvents.TouchUpInside)
-        
-        multipBtn.setTitle("×", forState: UIControlState.Normal)
-        multipBtn.titleLabel!.font = UIFont.systemFontOfSize(28.0)
-        view.addSubview(multipBtn)
-        multipBtn.addTarget(self, action: Selector("operate:"),
-            forControlEvents: UIControlEvents.TouchUpInside)
 
-        diviBtn.setTitle("÷", forState: UIControlState.Normal)
-        diviBtn.titleLabel!.font = UIFont.systemFontOfSize(28.0)
-        view.addSubview(diviBtn)
-        diviBtn.addTarget(self, action: Selector("operate:"),
-            forControlEvents: UIControlEvents.TouchUpInside)
-
-        additionBtn.setTitle("+", forState: UIControlState.Normal)
-        additionBtn.titleLabel!.font = UIFont.systemFontOfSize(28.0)
-        view.addSubview(additionBtn)
-        additionBtn.addTarget(self, action: Selector("operate:"),
-            forControlEvents: UIControlEvents.TouchUpInside)
-        
-        subBtn.setTitle("−", forState: UIControlState.Normal)
-        subBtn.titleLabel!.font = UIFont.systemFontOfSize(28.0)
-        view.addSubview(subBtn)
-        subBtn.addTarget(self, action: Selector("operate:"),
-            forControlEvents: UIControlEvents.TouchUpInside)
+        initArithmeticButton(multipBtn,     opera: "×");
+        initArithmeticButton(diviBtn,       opera: "÷");
+        initArithmeticButton(additionBtn,   opera: "+");
+        initArithmeticButton(subBtn,        opera: "−");
         
         layoutViews()
     
+    }
+    
+    func initArithmeticButton(btn: UIButton, opera: String) {
+        btn.setTitle(opera, forState: UIControlState.Normal)
+        btn.titleLabel!.font = UIFont.systemFontOfSize(28.0)
+        view.addSubview(btn)
+        btn.addTarget(self, action: Selector("operate:"),
+            forControlEvents: UIControlEvents.TouchUpInside)
+
     }
     
     func layoutViews() {
@@ -107,23 +92,23 @@ class CalculatorViewController: UIViewController {
             view.top        == view.superview!.top + 70
         }
         
-        constrain(btnArray[6], btnArray[7], btnArray[8], multipBtn, display) { view1, view2, view3, view4, view5 in
+        constrain(btnArray[7], btnArray[8], btnArray[9], multipBtn, display) { view1, view2, view3, view4, view5 in
             layoutButttons(view1, view2: view2, view3: view3, view4: view4, view5: view5)
         }
         
-        constrain(btnArray[3], btnArray[4], btnArray[5], diviBtn, btnArray[6]) { view1, view2, view3, view4, view5 in
+        constrain(btnArray[4], btnArray[5], btnArray[6], diviBtn, btnArray[7]) { view1, view2, view3, view4, view5 in
             layoutButttons(view1, view2: view2, view3: view3, view4: view4, view5: view5)
         }
         
-        constrain(btnArray[0], btnArray[1], btnArray[2], additionBtn, btnArray[3]) { view1, view2, view3, view4, view5 in
+        constrain(btnArray[1], btnArray[2], btnArray[3], additionBtn, btnArray[4]) { view1, view2, view3, view4, view5 in
             layoutButttons(view1, view2: view2, view3: view3, view4: view4, view5: view5)
         }
         
-        constrain(num0Btn, btnArray[1]) { view1, view2 in
+        constrain(btnArray[0], btnArray[2]) { view1, view2 in
             layoutButttons(view1, view2: view2)
         }
         
-        constrain(enterBtn, btnArray[2]) {view1, view2 in
+        constrain(enterBtn, btnArray[3]) {view1, view2 in
             layoutButttons(view1, view2: view2)
         }
         
