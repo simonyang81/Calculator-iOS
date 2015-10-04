@@ -16,9 +16,7 @@ class CalculatorViewController: UIViewController {
     // var display: UILabel? which is equivalent to "var display: UILabel? = nil", have to use '!' to unwrap optional type
     
     var btnArray     = [UIButton]()
-    var operandStack = Array<Double>()
-    
-//    var num0Btn      = UIButton(type: UIButtonType.System)
+    var operandStack = [Double]()
     
     var enterBtn     = UIButton(type: UIButtonType.System)
     var multipBtn    = UIButton(type: UIButtonType.System)
