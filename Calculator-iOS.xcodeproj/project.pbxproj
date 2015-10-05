@@ -10,6 +10,7 @@
 		36B9D4E7C2D8A37739148703 /* Pods_Calculator_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C5E4DA15B81AB0CFB9DAEB /* Pods_Calculator_iOS.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F44B38F71BB3CFE6008F450F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = F44B38F61BB3CFE6008F450F /* Podfile */; settings = {ASSET_TAGS = (); }; };
 		F45D98D51BB4DCA40058AA63 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F45D98D41BB4DCA40058AA63 /* .gitignore */; settings = {ASSET_TAGS = (); }; };
+		F46C18131BC26F5E008AC121 /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46C18121BC26F5E008AC121 /* CalculatorBrain.swift */; settings = {ASSET_TAGS = (); }; };
 		F475A8741BB7E20E00D304A6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F475A8731BB7E20E00D304A6 /* MainViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F475A8761BB7E53600D304A6 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F475A8751BB7E53600D304A6 /* CalculatorViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		F4E3D2351BB3C7650014F44C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3D2341BB3C7650014F44C /* AppDelegate.swift */; };
@@ -42,6 +43,7 @@
 		D6B3E5AD3EEDE87B23CE9C50 /* Pods-Calculator-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Calculator-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Calculator-iOS/Pods-Calculator-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		F44B38F61BB3CFE6008F450F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F45D98D41BB4DCA40058AA63 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		F46C18121BC26F5E008AC121 /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 		F475A8731BB7E20E00D304A6 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F475A8751BB7E53600D304A6 /* CalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		F4E3D2311BB3C7650014F44C /* Calculator-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Calculator-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +129,7 @@
 		F4E3D2331BB3C7650014F44C /* Calculator-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				F46C18121BC26F5E008AC121 /* CalculatorBrain.swift */,
 				F4E3D2341BB3C7650014F44C /* AppDelegate.swift */,
 				F4E3D23B1BB3C7650014F44C /* Assets.xcassets */,
 				F4E3D2401BB3C7650014F44C /* Info.plist */,
@@ -340,6 +343,7 @@
 			files = (
 				F475A8741BB7E20E00D304A6 /* MainViewController.swift in Sources */,
 				F475A8761BB7E53600D304A6 /* CalculatorViewController.swift in Sources */,
+				F46C18131BC26F5E008AC121 /* CalculatorBrain.swift in Sources */,
 				F4E3D2351BB3C7650014F44C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

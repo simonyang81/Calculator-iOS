@@ -26,6 +26,8 @@ class CalculatorViewController: UIViewController {
     
     var userIsInTheMiddleOfTypingANumber = false
     
+    var brain = CalculatorBrain()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -168,32 +170,49 @@ class CalculatorViewController: UIViewController {
     
     func enter(sender: UIButton) {
         userIsInTheMiddleOfTypingANumber = false
-        operandStack.append(displayValue)
+        if let result = brain.pushOperand(displayValue) {
+            displayValue = result
+        } else {
+            displayValue = 0
+        }
         
-        print("operandStack == \(operandStack)")
+        
+//        operandStack.append(displayValue)
+//        
+//        print("operandStack == \(operandStack)")
     }
     
     func operate(sender: UIButton) {
-        let opetation = sender.currentTitle!
+//        let opetation = sender.currentTitle!
         if userIsInTheMiddleOfTypingANumber {
             enter(sender)
         }
         
-        switch opetation {
-            case "×":
-                performOperation(sender) { $0 * $1 }
+        if let operation = sender.currentTitle {
+            if let result = brain.performOperation(operation) {
+                displayValue = result
+            } else {
+                displayValue = 0
+            }
             
-            case "÷":
-                performOperation(sender) { $1 / $0 }
-
-            case "+":
-                performOperation(sender) { $0 + $1 }
-            
-            case "−":
-                performOperation(sender) { $1 - $0 }
-            
-            default: break
         }
+        
+        
+//        switch opetation {
+//            case "×":
+//                performOperation(sender) { $0 * $1 }
+//            
+//            case "÷":
+//                performOperation(sender) { $1 / $0 }
+//
+//            case "+":
+//                performOperation(sender) { $0 + $1 }
+//            
+//            case "−":
+//                performOperation(sender) { $1 - $0 }
+//            
+//            default: break
+//        }
     }
 
     func performOperation(sender: UIButton, operation: (Double, Double) -> Double) {
