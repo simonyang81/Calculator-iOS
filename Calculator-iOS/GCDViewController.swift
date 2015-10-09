@@ -28,6 +28,10 @@ class GCDViewController: UIViewController {
                 print("\(idx) ---> \(NSThread.currentThread())")
             }
             
+            
+//            Get Main Queue
+//            let queue = dispatch_get_main_queue() 
+            
             dispatch_sync(dispatch_get_main_queue(), { () -> Void in
                 self.navigationItem.title  = "Update Test GCD"
             })

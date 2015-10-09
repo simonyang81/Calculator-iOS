@@ -8,7 +8,6 @@
 
 import UIKit
 import Cartography
-import Dispatch
 
 class CalculatorViewController: UIViewController {
 
@@ -72,10 +71,6 @@ class CalculatorViewController: UIViewController {
         initArithmeticButton(subBtn,        opera: "−");
         
         layoutViews()
-        
-//        Get Main Queue
-//        let queue = dispatch_get_main_queue()
-        
         
     
     }
