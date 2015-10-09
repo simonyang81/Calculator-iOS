@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Cartography
 
 class MainViewController: UIViewController {
 
+    let gcdBtn = UIButton(type: UIButtonType.System)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,11 +25,29 @@ class MainViewController: UIViewController {
             target: self,
             action: Selector("gotoCalculatorScreen:"))
         self.navigationItem.rightBarButtonItem = rightBtn
+                
+        gcdBtn.setTitle("测试GCD", forState: UIControlState.Normal)
+        gcdBtn.titleLabel!.font = UIFont.systemFontOfSize(26.0)
+        view.addSubview(gcdBtn)
+        gcdBtn.addTarget(self, action: Selector("gotoGCDController:"), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        constrain(gcdBtn) { view in
+            view.centerX    == view.superview!.centerX
+            view.leading    == view.superview!.leading + 20
+            view.trailing   == view.superview!.trailing - 20
+            view.top        == view.superview!.top + 100
+        }
+        
         
     }
     
     func gotoCalculatorScreen(sender: UIButton) {
         let vc = CalculatorViewController()
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+    
+    func gotoGCDController(sender: UIButton) {
+        let vc = GCDViewController()
         self.navigationController!.pushViewController(vc, animated: true)
     }
 
